@@ -1,6 +1,6 @@
-"use client"
+"use client";
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
 export default function HomePage() {
   const [animeData, setAnimeData] = useState(null);
@@ -9,13 +9,13 @@ export default function HomePage() {
   useEffect(() => {
     async function fetchAnime() {
       try {
-        const response = await fetch('/api/anilist');
-        if (!response.ok) throw new Error('Failed to fetch data');
-        
+        const response = await fetch("/api/anilist");
+        if (!response.ok) throw new Error("Failed to fetch data");
+
         const data = await response.json();
-        setAnimeData(data.data.Media);  // Assuming the API response has "data.Media"
+        setAnimeData(data.data.Media); // Assuming the API response has "data.Media"
       } catch (error) {
-        console.error('Error fetching anime:', error);
+        console.error("Error fetching anime:", error);
         setError(error.message);
       }
     }
@@ -27,10 +27,12 @@ export default function HomePage() {
   if (!animeData) return <p>Loading...</p>;
 
   return (
-    <div>
-      <h1>{animeData.title.english || animeData.title.romaji}</h1>
-      <p>ID: {animeData.id}</p>
-      <p>Title (Native): {animeData.title.native}</p>
-    </div>
+    <section className="home-container">
+      <div className="wrapper-container">
+        <div>{animeData.title.english || animeData.title.romaji}</div>
+        <div>ID: {animeData.id}</div>
+        <div>Title (Native): {animeData.title.native}</div>
+      </div>
+    </section>
   );
 }

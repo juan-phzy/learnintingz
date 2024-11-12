@@ -39,19 +39,20 @@ body {
     w-full h-full /* size settings */
 
     /* additional settings */
-    text-white text-xs
+    text-white text-2xl
     bg-black;
   }
 
   .wrapper-container{
     /* Tailwind CSS */
     @apply border-blue-500 border-[24px] border-solid
-    flex justify-center items-start flex-wrap
+    flex-col justify-center items-center
+    
+    gap-5
     
     w-1/2 h-fit
 
-    max-h-[600px]
-    overflow-y-scroll;
+    max-h-[600px];
 
     /* Regular CSS */
     box-shadow: 0px 4px 40px 0px #FF7622;
