@@ -1,37 +1,32 @@
-"use client";
-
-import { useEffect, useState } from "react";
+import { sampleuser } from "@/constants";
+import JsonEx from "@/components/JsonEx";
+import MyUser from "@/components/MyUser";
 
 export default function HomePage() {
-  const [animeData, setAnimeData] = useState(null);
-  const [error, setError] = useState(null);
+  // imagine the following:
+  // fetch data
+  // const { data, error } = await fetch("https://api.example.com/user/123");
 
-  useEffect(() => {
-    async function fetchAnime() {
-      try {
-        const response = await fetch("/api/anilist");
-        if (!response.ok) throw new Error("Failed to fetch data");
+  // Our "data here is sampleuser"
 
-        const data = await response.json();
-        setAnimeData(data.data.Media); // Assuming the API response has "data.Media"
-      } catch (error) {
-        console.error("Error fetching anime:", error);
-        setError(error.message);
-      }
-    }
+  // the example code would be:
 
-    fetchAnime();
-  }, []);
+  // console.log(data)    make sure this is parsed into an actual object and not JSON
+  // const sampleuser:User = data
 
-  if (error) return <p>Error: {error}</p>;
-  if (!animeData) return <p>Loading...</p>;
+  console.log("Server Side Log");
 
   return (
     <section className="home-container">
       <div className="wrapper-container">
-        <div>{animeData.title.english || animeData.title.romaji}</div>
-        <div>ID: {animeData.id}</div>
-        <div>Title (Native): {animeData.title.native}</div>
+        <div className="apiexample">
+          <MyUser sampleuser={sampleuser} name={sampleuser.name} email={sampleuser.email} />
+        </div>
+
+
+        <div className="jsonexample hidden">
+          <JsonEx />
+        </div>
       </div>
     </section>
   );
